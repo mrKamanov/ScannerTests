@@ -1,0 +1,85 @@
+import os
+
+class OMRApp(QWidget):
+    def __init__(self, main_window):
+        super().__init__()
+        self.main_window = main_window
+        self.setWindowTitle("Конфигурация OMR сетки и видео")
+
+        # Другие начальные настройки...
+
+        # Добавляем стили через QSS
+        self.set_styles()
+
+    def set_styles(self):
+        """Устанавливаем стиль для приложения"""
+        style_path = 'styles.css'
+
+        # Проверка, существует ли файл стилей
+        if os.path.exists(style_path):
+            with open(style_path, 'r') as f:
+                style = f.read()
+            self.setStyleSheet(style)
+        else:
+            print(f"Ошибка: файл {style_path} не найден.")
+            # Можно установить дефолтный стиль, если файл не найден:
+            self.setStyleSheet("""
+                QWidget {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    color: #333;
+                }
+
+                #right_widget {
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    padding: 20px;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                QPushButton {
+                    background-color: #6c6cff;
+                    color: white;
+                    border: none;
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    margin: 8px;
+                    transition: background-color 0.3s ease;
+                }
+
+                QPushButton:hover {
+                    background-color: #3f3fdf;
+                }
+
+                QLabel {
+                    font-size: 18px;
+                    margin: 5px;
+                    color: #4b4b4b;
+                }
+
+                QLineEdit {
+                    padding: 8px;
+                    font-size: 16px;
+                    border: 2px solid #ccc;
+                    border-radius: 8px;
+                    margin: 10px;
+                }
+
+                QCheckBox {
+                    font-size: 16px;
+                    margin: 5px;
+                }
+
+                QScrollArea {
+                    background-color: #f9f9f9;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                }
+
+                QSplitter::handle {
+                    background-color: #e6e6e6;
+                    width: 10px;
+                    border: none;
+                }
+            """)
